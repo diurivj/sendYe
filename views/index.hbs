@@ -1,0 +1,53 @@
+<div id="container">
+  <h1>Ye</h1>
+  <blockquote id="quote"></blockquote>
+  <button id="generate">
+    Generate ye
+  </button>
+  <form action="/" method="POST">
+    <input type="email" name="email" />
+    <input type="text" name="quote" hidden="true" />
+    <button id="send" type="submit">
+      Send ye
+    </button>
+  </form>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script>
+  document.querySelector('#generate').onclick = () => {
+    axios.get('https://api.kanye.rest/')
+      .then(({ data: { quote } }) => {
+        document.querySelector('#quote').innerText = quote
+        document.querySelector('input[name="quote"]').value = quote
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+</script>
+
+<style>
+  #container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(228, 210, 231)
+  }
+
+  h1 {
+    color: white;
+  }
+
+  blockquote {
+    color: white;
+  }
+
+  #container * {
+    margin: 20px;
+  }
+</style>
